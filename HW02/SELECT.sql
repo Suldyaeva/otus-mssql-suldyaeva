@@ -1,21 +1,4 @@
 /*
-Домашнее задание по курсу MS SQL Server Developer в OTUS.
-Занятие "02 - Оператор SELECT и простые фильтры, JOIN".
-Задания выполняются с использованием базы данных WideWorldImporters.
-Бэкап БД WideWorldImporters можно скачать отсюда:
-https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Full.bak
-Описание WideWorldImporters от Microsoft:
-* https://docs.microsoft.com/ru-ru/sql/samples/wide-world-importers-what-is
-* https://docs.microsoft.com/ru-ru/sql/samples/wide-world-importers-oltp-database-catalog
-*/
-
--- ---------------------------------------------------------------------------
--- Задание - написать выборки для получения указанных ниже данных.
--- ---------------------------------------------------------------------------
-
-USE WideWorldImporters
-
-/*
 1. Все товары, в названии которых есть "urgent" или название начинается с "Animal".
 Вывести: ИД товара (StockItemID), наименование товара (StockItemName).
 Таблицы: Warehouse.StockItems.
