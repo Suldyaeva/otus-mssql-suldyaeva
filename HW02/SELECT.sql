@@ -1,4 +1,4 @@
-/* 
+/*  
 1. Все товары, в названии которых есть "urgent" или название начинается с "Animal".
 Вывести: ИД товара (StockItemID), наименование товара (StockItemName).
 Таблицы: Warehouse.StockItems.
