@@ -86,7 +86,9 @@ SELECT TOP 5
 /*
 2. Удалите одну запись из Customers, которая была вами добавлена
 */
-DELETE TOP (1) FROM Purchasing.Suppliers WHERE SupplierName LIKE '%1%' 
+DELETE TOP (1) 
+FROM Purchasing.Suppliers 
+WHERE SupplierName LIKE '%1%' 
 
 /*
 3. Изменить одну запись, из добавленных через UPDATE
