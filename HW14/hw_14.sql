@@ -8,7 +8,7 @@ ALTER DATABASE WideWorldImporters SET TRUSTWORTHY ON;
 ALTER AUTHORIZATION    
    ON DATABASE::WideWorldImporters TO [sa];
 
---создание контракта и типов сообщений
+--СЃРѕР·РґР°РЅРёРµ РєРѕРЅС‚СЂР°РєС‚Р° Рё С‚РёРїРѕРІ СЃРѕРѕР±С‰РµРЅРёР№
 
 USE WideWorldImporters
 -- For Request
@@ -30,7 +30,7 @@ CREATE CONTRACT [//WWI/SB/Contract]
       );
 GO
 
--- создание очередей
+-- СЃРѕР·РґР°РЅРёРµ РѕС‡РµСЂРµРґРµР№
 CREATE QUEUE TargetQueueWWI;
 
 CREATE SERVICE [//WWI/SB/TargetService]
@@ -45,7 +45,7 @@ CREATE SERVICE [//WWI/SB/InitiatorService]
        ON QUEUE InitiatorQueueWWI
        ([//WWI/SB/Contract]);
 GO
---создаем таблицу куда складываем данные при обработке очереди 
+--СЃРѕР·РґР°РµРј С‚Р°Р±Р»РёС†Сѓ РєСѓРґР° СЃРєР»Р°РґС‹РІР°РµРј РґР°РЅРЅС‹Рµ РїСЂРё РѕР±СЂР°Р±РѕС‚РєРµ РѕС‡РµСЂРµРґРё 
 CREATE TABLE sales.cust_orders_cnt
 (
     customer_id INT,
@@ -53,7 +53,7 @@ CREATE TABLE sales.cust_orders_cnt
     date_start  date ,
     date_end  date
 )
---процедура отправки сообщения
+--РїСЂРѕС†РµРґСѓСЂР° РѕС‚РїСЂР°РІРєРё СЃРѕРѕР±С‰РµРЅРёСЏ
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -101,7 +101,7 @@ BEGIN
 END
 GO
 
---обработка очереди
+--РѕР±СЂР°Р±РѕС‚РєР° РѕС‡РµСЂРµРґРё
 CREATE PROCEDURE Sales.Get_Order
 AS
 BEGIN
@@ -180,7 +180,7 @@ BEGIN
 	COMMIT TRAN;
 END
 
---закрытие диалога
+--Р·Р°РєСЂС‹С‚РёРµ РґРёР°Р»РѕРіР°
 
 CREATE PROCEDURE Sales.ConfirmInvoice
 AS
@@ -203,7 +203,7 @@ BEGIN
 	COMMIT TRAN; 
 END
 
---Настройки
+--РќР°СЃС‚СЂРѕР№РєРё
 USE [WideWorldImporters]
 GO
 
@@ -218,7 +218,7 @@ ALTER QUEUE [dbo].[TargetQueueWWI] WITH STATUS = ON , RETENTION = OFF , POISON_M
 
 GO
 
---вызовы процедур
+--РІС‹Р·РѕРІС‹ РїСЂРѕС†РµРґСѓСЂ
 
 SELECT *
 FROM  Sales.cust_orders_cnt;
