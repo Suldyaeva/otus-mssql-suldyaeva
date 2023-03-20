@@ -4,14 +4,14 @@ use FitnessClub;
 
 CREATE TABLE Trainers(
 	ID_Trainers			int not null identity(1, 1)  primary key,
-	Surname_and_name	varchar(50),
+	Surname_and_name	nvarchar(50),
 	Date_of_birth		date not null,
 	Date_of_admission	date not null,
-	Address				varchar(50),
-	Telephone			varchar(50),
-	N_Pasport_Trainers	varchar(50),
-	Category			varchar(50),
-	Specialisation		varchar(50),
+	Address				nvarchar(50),
+	Telephone			nvarchar(50),
+	N_Pasport_Trainers	nvarchar(50),
+	Category			nvarchar(50),
+	Specialisation		nvarchar(50),
 	Salary				numeric(19,4)
 )
 GO
@@ -35,7 +35,7 @@ insert into Sign_up_for_a_training values
 
 CREATE TABLE Sports_Hall(
 	ID_Hall				int not null identity(1, 1)  primary key,
-	Name				varchar(50)
+	Name				nvarchar(50)
 )
 GO
 
@@ -45,8 +45,8 @@ insert into Sports_Hall values
 ('Зал групповых занятий №1')
 
 CREATE TABLE Training(
-	ID_Training				int not null identity(1, 1)  primary key,
-	Name				varchar(50)
+	ID_Training			int not null identity(1, 1)  primary key,
+	Name				nvarchar(50)
 )
 GO
 
@@ -68,10 +68,10 @@ insert into Attendance values
 
 CREATE TABLE Clients(
 	ID_Clients			int not null identity(1, 1)  primary key,
-	Name				varchar(50),
+	Name				nvarchar(50),
 	Date_of_birth		date not null,
-	Telephone			varchar(50),
-	N_Pasport_Trainers	varchar(50)
+	Telephone			nvarchar(50),
+	N_Pasport_Trainers	nvarchar(50)
 )
 GO
 
@@ -112,8 +112,8 @@ insert into Sale_of_subscription values
 create TABLE Tariff(
 	ID_Tariff			int not null identity(1, 1)  primary key,
 	ID_Hall				INT,
-	Name				varchar(50),
-	Description			varchar(50),
+	Name				nvarchar(50),
+	Description			nvarchar(50),
 	Cost				numeric(19,4),
 	CONSTRAINT FK_Tariff FOREIGN KEY (ID_Hall) REFERENCES Sports_Hall (ID_Hall)
 )

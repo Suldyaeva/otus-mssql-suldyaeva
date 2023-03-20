@@ -1,28 +1,28 @@
 use WideWorldImporters;
 
---создаем файловую группу
+--СЃРѕР·РґР°РµРј С„Р°Р№Р»РѕРІСѓСЋ РіСЂСѓРїРїСѓ
 ALTER DATABASE [WideWorldImporters] ADD FILEGROUP [TransactionTypeID]
 GO
 
---добавляем файл БД
+--РґРѕР±Р°РІР»СЏРµРј С„Р°Р№Р» Р‘Р”
 
 ALTER DATABASE [WideWorldImporters] ADD FILE 
-( NAME = N'TransactionTypeID', FILENAME = N'C:\Users\olgaasu\Desktop\Обучение\otus-mssql-suldyaeva\HW19\TransactionTypeID.ndf' , 
+( NAME = N'TransactionTypeID', FILENAME = N'C:\Users\olgaasu\Desktop\РћР±СѓС‡РµРЅРёРµ\otus-mssql-suldyaeva\HW19\TransactionTypeID.ndf' , 
 SIZE = 109715KB , FILEGROWTH = 65536KB ) TO FILEGROUP [TransactionTypeID]
 GO
 
 
---создаем функцию партиционирования по SalespersonID 
+--СЃРѕР·РґР°РµРј С„СѓРЅРєС†РёСЋ РїР°СЂС‚РёС†РёРѕРЅРёСЂРѕРІР°РЅРёСЏ РїРѕ SalespersonID 
 CREATE PARTITION FUNCTION [fnTransactionTypeIDPartition](int) AS RANGE RIGHT FOR VALUES
 (10,11,12);																																																									
 GO
 
--- партиционируем, используя созданную функцию
+-- РїР°СЂС‚РёС†РёРѕРЅРёСЂСѓРµРј, РёСЃРїРѕР»СЊР·СѓСЏ СЃРѕР·РґР°РЅРЅСѓСЋ С„СѓРЅРєС†РёСЋ
 CREATE PARTITION SCHEME [schmTransactionTypeIDPartition] AS PARTITION [fnTransactionTypeIDPartition] 
 ALL TO ([TransactionTypeID])
 GO
 
---создаем секционированные таблицы
+--СЃРѕР·РґР°РµРј СЃРµРєС†РёРѕРЅРёСЂРѕРІР°РЅРЅС‹Рµ С‚Р°Р±Р»РёС†С‹
 CREATE TABLE [Warehouse].[StockItemTransactions_TransactionTypeID](
 	[StockItemTransactionID] [int] NOT NULL,
 	[StockItemID] [int] NOT NULL,
@@ -74,7 +74,7 @@ SELECT [StockItemTransactionID]
 
  GO
 
---Проверяем все ли корректно отработало и партиционировались ли данные
+--РџСЂРѕРІРµСЂСЏРµРј РІСЃРµ Р»Рё РєРѕСЂСЂРµРєС‚РЅРѕ РѕС‚СЂР°Р±РѕС‚Р°Р»Рѕ Рё РїР°СЂС‚РёС†РёРѕРЅРёСЂРѕРІР°Р»РёСЃСЊ Р»Рё РґР°РЅРЅС‹Рµ
 
 select distinct t.name
 from sys.partitions p
@@ -82,7 +82,7 @@ inner join sys.tables t
 	on p.object_id = t.object_id
 where p.partition_number <> 1
 
---смотрим как конкретно по диапазонам разделились данные
+--СЃРјРѕС‚СЂРёРј РєР°Рє РєРѕРЅРєСЂРµС‚РЅРѕ РїРѕ РґРёР°РїР°Р·РѕРЅР°Рј СЂР°Р·РґРµР»РёР»РёСЃСЊ РґР°РЅРЅС‹Рµ
 SELECT  $PARTITION.fnTransactionTypeIDPartition(TransactionTypeID) AS Partition
 		, COUNT(*) AS [COUNT]
 		, MIN(TransactionTypeID)
